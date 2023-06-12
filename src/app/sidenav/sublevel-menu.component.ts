@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { INavbarData } from './helper';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
@@ -15,7 +15,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
           *ngIf="item.items && item.items.length > 0">
             <i class="sublevel-link-icon fa fa-circle"></i>
             <span class="sublevel-link-text" *ngIf="collapsed">{{item.label}}</span>
-            <i *ngIf="item.items && collapsed" class="menu-collapse-icon" [ngClass]="!item.expanded ? 'fal fa-angle-right' : 'fal fa-angle-down' "]></i>
+            <i *ngIf="item.items && collapsed" class="menu-collapse-icon" [ngClass]="!item.expanded ? 'fal fa-angle-right' : 'fal fa-angle-down' "></i>
           </a>
           <a class="sublevel-nav-link" *ngIf="!item.items || (item.items && item.items.length === 0)"
               [routerLink]="[item.routelink]"
@@ -50,7 +50,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ])
   ]
 })
-export class SublevelMenuComponent {
+export class SublevelMenuComponent implements OnInit{
 
   @Input() data: INavbarData = {
     routelink: '',
@@ -76,6 +76,12 @@ export class SublevelMenuComponent {
       }
     }
     item.expanded = !item.expanded;
+  }
+
+  constructor(){}
+
+  ngOnInit(): void {
+    
   }
 
 }
